@@ -1,0 +1,1250 @@
+  /*Table content to search*/
+
+
+- Chú ý hàm nào dùng node và index và kiểu trả về của các hàm, nếu không phải void thì có thể .info.abcd hoặc tạo Node/ int để lưu kết quả trả về
+- Nếu có index cần node thì dùng getNode(index)
+- Nếu có Node, cần dùng index thì dùng search(Node)
+
+ ||____ADD______//add last with condition: if char at 0 == B then do nothing
+ ||	||______//add first with condition: if chat at 0 == B or price > 100 then do nothing
+ ||	||______//add first
+ ||	||______//add last
+ ||     ||______//add many
+ ||     ||______//add if age > 4
+ ||     ||______//add element have max age
+ ||	
+ ||___INSERT____//insert position k
+ ||       ||____//insert after position k
+ ||
+ ||___SEARCH____//search node
+ ||       ||____//search node with string
+ ||       ||____//search node with integer/double
+ ||       ||____//search by info.weight
+ ||       ||____//search node with integer/double
+ ||
+ ||___DELETE____//delete at position k
+ ||       ||____//delete a particular node at position K using node
+ ||       ||____//remove first
+ ||       ||____//delete first node have age < 6
+ ||       ||____//delete a node after position k
+ ||       ||____//delete node after 2 node have age < 9
+ ||       ||____//delete node thirdth have age < 6
+ ||       ||____//delete first node having price = 5
+ ||       ||____//delete node first after node have position k
+ ||       ||____//delete node after node have price > xPrice
+ ||       ||____//delete 2 node last have age > 5
+ ||       ||____//delete second biggest
+ ||
+ ||___SORT______//sort by string
+ ||     ||______//sort by integer/ double
+ ||     ||______//sort by for
+ ||     ||______//sort 3 first element 
+ ||
+ ||___SWAP______//swap min max
+ ||     ||______//swap node max second with node min first
+ ||     ||______//swap 2 Nodes
+
+ ||
+ ||___GET_______//get node at index k
+ ||    ||_______//get first max node 
+ ||    ||_______//get last max node 
+ ||    ||_______//get index of first max node 
+ ||    ||_______//get index of last max node 
+ ||    ||_______//get first min node 
+ ||    ||_______//get last min node 
+ ||    ||_______//get index of first min node 
+ ||    ||_______//get index of last min node 
+ ||    ||_______//get index of info.rate = rate 
+ 
+ ||
+ ||___ORTHER____//traverse
+ ||       ||____//replace a node
+ ||       ||____//count number of node
+ ||       ||____//reverse list
+ ||       ||____//reverse list from index i to j
+ ||       ||____//append another list
+ ||       ||____//change name first
+ ||       ||____//delete last biggest weight
+ ||       ||____//Find the first node having salary > 8
+ ||       ||____//Find nth node with value
+ ||       ||____//delete the 2nd node having maximum radius 
+
+
+ 
+//add last with condition: if char at 0 == B then do nothing
+
+void addLast(String xForest, int xHoof, int xHair) {
+    
+    if (xForest.charAt(0) == 'B') {
+                return;
+    }
+    addLast(new Bison(xForest, xHoof, xHair));
+  }
+  
+  void addLast(Bison x) {
+        Node node = new Node(x);
+
+        if (head == null) {
+            head = node;
+            tail = head;
+            return;
+        }
+
+        tail.next = node;
+        tail = node;
+    }
+	
+
+//add first with condition: if chat at 0 == B or price > 100 then do nothing
+  void addFirst(String xOwner, int xPrice)
+   {//You should write here appropriate statements to complete this function.
+    if (xOwner.charAt(0) == 'B' ||  xPrice > 100) {
+                return;
+    }
+    addFirst(new Car(xOwner, xPrice));
+  }
+
+//add first
+    public void addFirst(Car x){
+		Node p = new Node(x);
+		if(isEmpty()) {head = tail = p;}
+		else {p.next = head; head = p;}
+    }
+
+  //add last
+  void addLast(Bison x) {
+        Node node = new Node(x);
+
+        if (head == null) {
+            head = node;
+            tail = head;
+            return;
+        }
+
+        tail.next = node;
+        tail = node;
+    }
+	
+	
+//add many
+	public void addMany(String [] a, int [] b){
+		int n,i; n=a.length;
+		for(i=0;i<n;i++) addLast(new Person(a[i],b[i]));
+    }
+	
+
+//add element have max age
+    public void addMaxAgeInH(){
+		Person k = getMaxColor();
+		Node p = head;
+		while(p != null){
+			if(p.info.age == k.age) h.addLast(p.info);
+			p = p.next;
+		}
+	}
+//them vao cuoi thi dung size, truoc cai cuoi thi la size()-1 hoac lien quan den cai cuoi, con lai thi dung index	
+//insert position k (insert index 0 thi dung add first)
+void insertPositionK(Bike x, int position) {
+        if (isEmpty()) {
+            head = tail = new Node(x);
+        }
+        int count = 1;
+        Node p = head;
+        while (p != null && count < position) {
+            p = p.next;
+            count++;
+        }
+        Node temp = p.next;
+        p.next = new Node(x, temp);
+    }
+    
+// get size 
+    int size() {
+        int count = 0;
+        Node node = head;
+        while (node != null) {
+            count++;
+            node = node.next;
+        }
+
+        return count;
+    }
+	
+//insert after position k
+	public void addAfterPositionK(int k, Person c){
+        Node p = new Node(c);
+        if(k == -1){
+            addFirst(c); return;
+        }
+        int count = 0;
+        Node p1 = head;
+        while(p1 != null && count < k){
+            p1 = p1.next; count++;
+        }
+        if(p1.next == null && count == k){
+            addLast(c); return;
+        }
+        p.next = p1.next;
+        p1.next = p; 
+    }
+
+//delete at position k
+	public void deleteAt(int k) {
+        if (isEmpty()) return;
+        if (k == 0) {//check if node is head
+            Node p = head;
+            head = head.next;
+            p.next = null;
+        } else {
+            Node p = getNode(k);//get node position k
+            if (p == null) return;
+            Node q = getNode(k - 1);//q is node before of p
+            // Remove p
+            q.next = p.next;
+            p.next = null;
+            if (p == tail) tail = q;
+        }
+    }
+//delete a node after position k
+    public void deleteAfterPosK(int k){
+        if(isEmpty()) return;
+        //remove head
+        if(k == -1) {
+            Node p = head;
+            head = head.next;
+            p.next = null;
+        }else {
+            Node p = getNode(k + 1);
+            if(p == null) return;
+            Node q = getNode(k);
+            //remove p
+       void removeFirst() {
+        if (isEmpty()) {
+            return;
+        }
+        head = head.next;
+        if (head == null) {
+            tail = null;
+        }
+    }
+
+    void remove(Node q) {
+        if (isEmpty() || q == null) {
+            return;
+        }
+        if (q == head) {
+            removeFirst();
+            return;
+        }
+        Node f = head;
+        while (f != null && f.next != q) {
+            f = f.next;
+        }
+        if (f == null) {
+            return;//q ko co trong danh sach
+        }
+        Node q1 = q.next;
+        f.next = q1;
+        if (f.next == null) {
+            tail = f;
+        }
+    }
+
+    //get node at index k
+    public Node getNode(int k) {
+        int c = 0;
+        Node p = head;
+        while (p != null && c < k) {
+            p = p.next;
+            c++;
+        }
+        return p;
+    }
+	
+
+//delete a particular node using Node
+void removeFirst(){
+        if (isEmpty()){
+            return;
+        }
+        head = head.next;
+        if (head == null){
+            tail = null;
+        }
+    }
+    
+    void remove(Node q){
+        if (isEmpty() || q == null){
+            return;
+        }
+        if (q == head){
+            removeFirst();
+            return;
+        }
+        Node f = head;
+        while(f !=null && f.next != q){
+            f = f.next;
+        }
+        if (f == null){
+            return;//q ko co trong danh sach
+        }
+        Node q1 = q.next;
+        f.next = q1;
+        if (f.next == null){
+            tail = f;
+        }
+    }
+	
+//search node by index
+	public Node search(int x)
+	{
+		Node p = head;
+		while(p != null && p.info != x) p = p.next;
+		return p;
+	}
+	
+//search node by info string name
+	public Node search(String colorName){
+        Node p = head;
+        while(p != null){
+            if(p.info.name.equalsIgnoreCase(colorName)){
+                break;
+            }
+            p = p.next;
+        }
+        return p;
+	}
+	
+//search node by info integer/double
+	public Node search(int xAge){
+		Node p=head;
+		while(p!=null){
+			if(p.info.age == xAge) return(p);
+			p=p.next;
+        }
+		return(null);
+     }
+	
+
+	 
+
+//delete first no age < 6
+    public void deleteFirstCondition(){
+		Node p = head;
+		while(p != null){
+			if(p.info.age<6) dele(p);
+			p=p.next;
+		}
+    }
+//delete a node at position 
+	public void deleteAt(int k) {
+        if (isEmpty()) return;
+        if (k == 0) {//check if node is head
+            Node p = head;
+            head = head.next;
+            p.next = null;
+        } else {
+            Node p = getNode(k);//get node position k
+            if (p == null) return;
+            Node q = getNode(k - 1);//q is node before of p
+            // Remove p
+            q.next = p.next;
+            p.next = null;
+            if (p == tail) tail = q;
+        }
+    }
+	
+//delete a node after position k
+    public void deleteAfterPosK(int k){
+        if(isEmpty()) return;
+        //remove head
+        if(k == -1) {
+            Node p = head;
+            head = head.next;
+            p.next = null;
+        }else {
+            Node p = getNode(k + 1);
+            if(p == null) return;
+            Node q = getNode(k);
+            //remove p
+            q.next = p.next;
+            p.next = null;
+            if(p == tail) tail = q;
+        }
+    }
+	
+//delete node after 2 node have age < 9
+	public void deleteAfterTwoNodeAgeSmallerNine(){
+		Node p = head;
+		while(p != null && p.info.age >= 9){
+			p = p.next;
+		}
+		if(p == null && p.next == null){
+			return;
+		}
+		remove(p.next.next);
+	}
+	
+//delete node thirdth have age < 6
+	public void removeThirthAgeSmallerSix(){
+		Node p = head;
+		int count = 0;
+		while(p != null){
+			if(p.info.age < 6 && count != 3) count ++;
+			else if(p.info.age < 6 && count == 3) break;
+			p = p.next;
+		}
+		remove(p);
+	}
+	
+
+// delete node at position K
+void removeFirst(){
+        if (isEmpty()){
+            return;
+        }
+        head = head.next;
+        if (head == null){
+            tail = null;
+        }
+    }
+    
+    void remove(Node q){
+        if (isEmpty() || q == null){
+            return;
+        }
+        if (q == head){
+            removeFirst();
+            return;
+        }
+        Node f = head;
+        while(f !=null && f.next != q){
+            f = f.next;
+        }
+        if (f == null){
+            return;//q ko co trong danh sach
+        }
+        Node q1 = q.next;
+        f.next = q1;
+        if (f.next == null){
+            tail = f;
+        }
+    }
+
+// search by info.weight
+Node searchByWeight(int xWeight){
+        Node p = head;
+        while (p!=null){
+            if(p.info.weight == xWeight){
+                return p;
+            }
+            p=p.next;
+        }
+        return null;
+    }
+
+// search second nodes having info.weight 
+Node searchByWeight(int xWeight){
+        Node p = head;
+        int count=0;
+        while (p!=null){
+            if(p.info.weight < xWeight){
+                count++;
+            }
+            if (count==2)
+                 return p;
+            p=p.next;
+        }
+        return null;
+    }
+
+
+
+
+//delete 2 node last have age > 5
+	public void removeTwoLastNodeCondition(){
+		int c = 0; int sz = size();
+		for(int i = sz - 1; i >= 0; i--){
+			Node p = getNode(i);
+			if(p.info.age > 5){
+				c++;
+				remove(p);
+            if(c >= 2) break;
+			}
+		}
+    }
+	
+//delete second biggest
+	public void removeSecond() {
+        Person firstMax = getMaxColor();
+        if(firstMax == null) return;
+        int n = size();
+        if(n <= 1 ) return;
+        int imax = 0; Node p = head;
+        while(p != null && p.info.age == firstMax.age){
+            imax++;
+            p = p.next;
+        }
+        // Find second max starting from imax
+        Person secondMax = (p != null) ? p.info : null;
+        for (int i = imax + 1; i < n; i++) {
+            Node pi = getNode(i);
+            if(pi.info.age > secondMax.age && pi.info.age != firstMax.age){
+                imax = i;
+                secondMax = pi.info;
+            }
+        }
+        if(imax < n) remove(imax);
+    } 
+
+
+
+	 
+//sort by string
+    public void sort(){
+		Node pi,pj; Person x;
+		pi=head;
+		while(pi!=null){
+			pj=pi.next;
+			while(pj!=null){
+				if(pj.info.name.compareTo(pi.info.name)<0){
+					x=pi.info;pi.info=pj.info;pj.info=x;
+				}
+				pj=pj.next;
+			}
+			pi=pi.next;
+		}
+    }
+
+//sort by integer/ double from index k to index h ascendingly
+//descending -> dau >
+Node pos(int k){
+        int i = 0;
+        Node p = head;
+        while (p!=null){
+            if (i == k){
+                return p;
+            }
+            i++;
+            p = p.next;
+        }
+        return null;
+    }
+  
+  void sort(int k, int h){
+        if (k > h){
+            return;
+        }
+        if (k < 0){
+            k = 0;
+        }
+        int n = size();
+        if ( h > n -1){
+            h = n - 1;
+        }
+        Node u = pos(k);
+        Node v = pos(h+1);
+        Node pi, pj;
+        Bike x;
+        pi = u;
+        while(pi != v){
+            pj = pi.next;
+            while ( pj != v){
+                if (pj.info.weight < pi.info.weight){
+                    x =pi.info;
+                    pi.info = pj.info;
+                    pj.info = x;
+                }
+                pj = pj.next;
+            }
+            pi = pi.next;
+        }
+    }
+	
+
+	
+//sort 3 first element 
+	public void sortThird() {
+        Node pi, pj; pi = head; int count = 0; 
+        while(pi != null) {
+            count++; pj = pi.next; int count1 = 0;
+            while(pj != null) {
+                count1++;
+                if(pi.info.name.compareToIgnoreCase(pj.info.name) < 0) {
+                    Person t = pi.info; pi.info = pj.info;pj.info = t;
+                }
+                pj = pj.next; if(count1 == 3 - count) break;
+            }
+            pi = pi.next; if(count == 2) break;
+        }
+    }
+	
+//swap min max
+public void swapMinMax(){
+	Node min = getMin();
+	Node max = getMax();       
+        Person t = min.info;
+        min.info = max.info;
+        max.info = t;
+	}
+	
+//swap node max second with node min first
+	public void swapMax2Min1(){
+		Node max = getMax();
+		Node min = getMin();
+		Node p = head;
+		int count = 0;
+		while(p != null){
+			if(p.info.age == max.info.age) count++;
+			if(count == 2) break;
+			p = p.next;
+		}
+		Person temp;
+		temp = p.info;
+		p.info = min.info;
+		min.info= temp;
+	}
+
+//swap 2 Nodes
+
+    public void swapTwoNodes(Node i, Node j) {
+        Plane t = i.info;
+        i.info = j.info;
+        j.info = t;
+    }
+
+
+	
+//get node max
+	public Person getMaxPerson(){
+        if(isEmpty()) return null;
+        Person max = head.info;                
+        Node p = head;
+        while( p != null){
+            if(p.info.age > max.age) max = p.info;
+            p = p.next;
+        }
+        return max; 
+    }
+//get first max Node
+    Node findMaxNode(){
+            int x;
+            Node p, q;
+            p = q = head;
+            x = head.info.weight;
+            p = p.next;
+            // > neu la first, >= neu la last
+            while (p != null){
+                if (p.info.weight > x){
+                    x = p.info.weight;
+                    q = p;
+                }
+                p = p.next;
+            }
+            return q;
+        }
+
+//get last max node
+    Node findMaxNode(){
+            int x;
+            Node p, q;
+            p = q = head;
+            x = head.info.weight;
+            p = p.next;
+            // > neu la first, >= neu la last
+            while (p != null){
+                if (p.info.weight >= x){
+                    x = p.info.weight;
+                    q = p;
+                }
+                p = p.next;
+            }
+            return q;
+        }
+
+//get first min Node
+    Node findMaxNode(){
+            int x;
+            Node p, q;
+            p = q = head;
+            x = head.info.weight;
+            p = p.next;
+            // > neu la first, < neu la last
+            while (p != null){
+                if (p.info.weight < x){
+                    x = p.info.weight;
+                    q = p;
+                }
+                p = p.next;
+            }
+            return q;
+        }
+
+//get last min Node
+    Node findMaxNode(){
+            int x;
+            Node p, q;
+            p = q = head;
+            x = head.info.weight;
+            p = p.next;
+            // > neu la first, <= neu la last
+            while (p != null){
+                if (p.info.weight <= x){
+                    x = p.info.weight;
+                    q = p;
+                }
+                p = p.next;
+            }
+            return q;
+        }
+
+//get index of first max Node
+    int firstMaxNodeIndex(){
+	    int count = 0;
+	    int res = 0;
+            int x;
+            Node p, q;
+            p = q = head;
+            x = head.info.weight;
+            p = p.next;
+            // > neu la first, < neu la last
+            while (p != null){
+                if (p.info.weight > x){
+                    x = p.info.weight;
+                    q = p;
+		    res = count;
+                }
+                p = p.next;
+		count++;
+            }
+            return res;
+        }
+
+//get index of last max Node
+    int lastMaxNodeIndex(){
+	    int count = 0;
+	    int res = 0;
+            int x;
+            Node p, q;
+            p = q = head;
+            x = head.info.weight;
+            p = p.next;
+            // > neu la first, < neu la last
+            while (p != null){
+                if (p.info.weight >= x){
+                    x = p.info.weight;
+                    q = p;
+		    res = 0;
+                }
+                p = p.next;
+		count++;
+            }
+            return res;
+        }
+
+//get index of first min Node
+    int firstMinNodeIndex(){
+	    int count = 0;
+	    int res = 0;
+            int x;
+            Node p, q;
+            p = q = head;
+            x = head.info.weight;
+            p = p.next;
+            // > neu la first, < neu la last
+            while (p != null){
+                if (p.info.weight < x){
+                    x = p.info.weight;
+                    q = p;
+		    res = 0;
+                }
+                p = p.next;
+		count++;
+            }
+            return res;
+        }
+
+//get index of last min Node
+    int lastMinNodeIndex(){
+	    int count = 0;
+	    int res = 0;
+            int x;
+            Node p, q;
+            p = q = head;
+            x = head.info.weight;
+            p = p.next;
+            // > neu la first, < neu la last
+            while (p != null){
+                if (p.info.weight <= x){
+                    x = p.info.weight;
+                    q = p;
+		    res = 0;
+                }
+                p = p.next;
+		count++;
+            }
+            return res;
+        }
+//tim min
+int findMinWeight(){
+        int x;
+        Node p, q;
+        p = q = head;
+        x = head.info.weight;
+        p = p.next;
+	//< neu la first, <= neu la last
+        while (p != null){
+            if (p.info.weight < x){
+                x = p.info.weight;
+                q = p;
+            }
+            p = p.next;
+        }
+        return x;
+    }
+    //get  max
+    int findMaxWeight(){
+            int x;
+            Node p, q;
+            p = q = head;
+            x = head.info.weight;
+            p = p.next;
+            // > neu la first, >= neu la last
+            while (p != null){
+                if (p.info.weight >= x){
+                    x = p.info.weight;
+                    q = p;
+                }
+                p = p.next;
+            }
+            return x;
+        }
+//get index of node having rate
+int getIndex(int rate) {
+        int indexRes = 0;
+        Node p = head;
+        while (p != null) {
+            if (p.info.rate == rate) break;
+            indexRes++;
+            p = p.next;
+        }
+        
+        return indexRes;
+    }
+
+//traverse
+    public void traverse(){
+		MyList h=new MyList();
+		Node p=head;Person x;
+		while(p!=null)
+			{x=p.info;h.addFirst(x);
+			p=p.next;
+        }
+		head=h.head;tail=h.tail;
+    }
+
+//replace a node change p.info.name from xName to yName
+	public void replace{
+	    Node p = head;
+        while(p != null){
+            if(p.info.name.equals("xName")){// xName was given
+                 break;
+            }
+            p = p.next;
+        }
+         if(p != null){                       
+              p.info.name = yName;// yName was given
+        }
+	}
+	
+//count number of node
+	int count(Node p)
+	 {if(p==null) return(0);
+	   int k,h,r;
+	   k = count(p.left);
+	   h = count(p.right);
+	   r = k+h+1;
+	   return(r);
+	 }
+	
+//reverse list
+	public void reverse() {
+        int n = size(), i, j;
+        for (i = 0, j = n - 1; i < j; i++, j--) {
+            Node pi = getNode(i);// create a node = getnode index i
+            Node pj = getNode(j);// create a node = getnode index j
+            Person temp = pi.info;// Note: change value of node, not change node
+            pi.info = pj.info;
+            pj.info = temp;
+        }
+    }
+
+//reverse list from index i to index j
+    public void reverseFromIToJ(int i, int j) {
+        int n = size();
+        for (; i < j; i++, j--) {
+            Node pi = getNode(i);// create a node = getnode index i
+            Node pj = getNode(j);// create a node = getnode index j
+            Plane temp = pi.info;// Note: change value of node, not change node
+            pi.info = pj.info;
+            pj.info = temp;
+        }
+    }	
+
+//append another list
+    void appendAnotherList(MyList h){
+      Node p=h.head;
+         while(p!=null)
+          {addLast(p.info);
+            p=p.next;
+      }
+    }
+	
+
+//change name of the first Node having name = "C6" to "CX"
+    void changeNameFirst(){
+      Node p=head;
+        while(p!=null)
+         {if(p.info.name.equals("C6")) {p.info.name="CX";break;}
+           p=p.next;
+         }
+	}
+}
+
+
+// delete last biggest weight
+
+void removeFirst(){
+        if (isEmpty()){
+            return;
+        }
+        head = head.next;
+        if (head == null){
+            tail = null;
+        }
+    }
+    
+    void remove(Node q) {
+        if (isEmpty() || q == null) {
+            return;
+        }
+        if (q == head) {
+            removeFirst();
+            return;
+        }
+        Node f = head;
+        while (f != null && f.next != q) {
+            f = f.next;
+        }
+        if (f == null) {
+            return;//q ko co trong danh sach
+        }
+        Node q1 = q.next;
+        f.next = q1;
+        if (f.next == null) {
+            tail = f;
+        }
+    }
+
+
+    //get node at index k
+
+    public Node getNode(int k) {
+        int c = 0;
+        Node p = head;
+        while (p != null && c < k) {
+            p = p.next;
+            c++;
+        }
+        return p;
+    }
+// get size 
+
+    int size() {
+        int count = 0;
+        Node node = head;
+        while (node != null) {
+            count++;
+            node = node.next;
+        }
+
+        return count;
+    }
+
+    public void removeLastBiggestWeight() {
+        int max = getNode(0).info.weight;
+        Node nodeToDel = null;
+        int sz = size();
+        for (int i = 0; i < sz - 1; i++) {
+            Node p = getNode(i);
+            if (p.info.weight >= max) {
+                nodeToDel = p;
+                max = p.info.weight;
+            }
+        }
+        remove(nodeToDel);
+    }
+
+
+//Find the first node having salary > 8
+//thay vao xSalary 
+    int count3 = 0;
+    Node resNode = null;
+//search node by info integer/double
+
+    public void search(int xSalary) {
+        Node p = head;
+        while (p != null) {
+            if (p.info.salary > xSalary) {
+                count3++;
+		//thay thu tu node can tim
+                if (count3 == 1) {
+                    resNode = p;
+                    return;
+                }
+            }
+            p = p.next;
+        }
+    }
+	
+//Find nth node with value
+    //tim node thu n co gia tri integer
+    int count = 0;
+
+    public Node search2ndNode(int xPaddle) {
+        Node p = head;
+        while (p != null) {
+            if (p.info.paddle == xPaddle) {
+                count++;
+                // thay n vao, vi du node thu 2 thi n = 2
+                if (count == 2) {
+                    return (p);
+                }
+            }
+            p = p.next;
+        }
+        return (null);
+    }
+
+//move the 2nd node having maximum paddle to the tail 
+
+    Node findMaxNode() {
+        int count = 0;
+        int x;
+        Node p, q;
+        p = q = head;
+        x = head.info.paddle;
+        p = p.next;
+        // > neu la first, >= neu la last
+        while (p != null) {
+            if (p.info.paddle > x) {
+                x = p.info.paddle;
+                q = p;
+            }
+            p = p.next;
+        }
+        return q;
+    }
+
+    public int search2ndNode(int xPaddle) {
+        int index = 0;
+        int count = 0;
+        Node p = head;
+        while (p != null) {
+            if (p.info.paddle == xPaddle) {
+                count++;
+                // thay n vao, vi du node thu 2 thi n = 2
+                if (count == 2) {
+                    return index;
+                }
+            }
+            p = p.next;
+            index++;
+        }
+        return -1;
+    }
+
+    void removeFirst() {
+        if (isEmpty()) {
+            return;
+        }
+        head = head.next;
+        if (head == null) {
+            tail = null;
+        }
+    }
+
+    void remove(Node q) {
+        if (isEmpty() || q == null) {
+            return;
+        }
+        if (q == head) {
+            removeFirst();
+            return;
+        }
+        Node f = head;
+        while (f != null && f.next != q) {
+            f = f.next;
+        }
+        if (f == null) {
+            return;//q ko co trong danh sach
+        }
+        Node q1 = q.next;
+        f.next = q1;
+        if (f.next == null) {
+            tail = f;
+        }
+    }
+
+    public void deleteAt(int k) {
+        if (isEmpty()) {
+            return;
+        }
+        if (k == 0) {//check if node is head
+            Node p = head;
+            head = head.next;
+            p.next = null;
+        } else {
+            Node p = getNode(k);//get node position k
+            if (p == null) {
+                return;
+            }
+            Node q = getNode(k - 1);//q is node before of p
+            // Remove p
+            q.next = p.next;
+            p.next = null;
+            if (p == tail) {
+                tail = q;
+            }
+        }
+    }
+
+    public Node getNode(int k) {
+        int c = 0;
+        Node p = head;
+        while (p != null && c < k) {
+            p = p.next;
+            c++;
+        }
+        return p;
+    }
+
+// 	cach dung:
+//        int maxPaddle = findMaxNode().info.paddle;
+//        int indexToDel = search2ndNode(maxPaddle);
+//        Node nodeToDel = getNode(indexToDel);
+//        if (indexToDel != -1) {
+//            deleteAt(indexToDel);
+//            addLast(nodeToDel.info);
+//        }
+
+
+//delete the 2nd node having maximum radius 
+
+    Node findMaxNode() {
+        int count = 0;
+        int x;
+        Node p, q;
+        p = q = head;
+        x = head.info.radius;
+        p = p.next;
+        // > neu la first, >= neu la last
+        while (p != null) {
+            if (p.info.radius > x) {
+                x = p.info.radius;
+                q = p;
+            }
+            p = p.next;
+        }
+        return q;
+    }
+
+    public int search2ndNode(int xRadius) {
+        int index = 0;
+        int count = 0;
+        Node p = head;
+        while (p != null) {
+            if (p.info.radius == xRadius) {
+                count++;
+                // thay n vao, vi du node thu 2 thi n = 2
+                if (count == 2) {
+                    return index;
+                }
+            }
+            p = p.next;
+            index++;
+        }
+        return -1;
+    }
+
+    void removeFirst() {
+        if (isEmpty()) {
+            return;
+        }
+        head = head.next;
+        if (head == null) {
+            tail = null;
+        }
+    }
+
+    void remove(Node q) {
+        if (isEmpty() || q == null) {
+            return;
+        }
+        if (q == head) {
+            removeFirst();
+            return;
+        }
+        Node f = head;
+        while (f != null && f.next != q) {
+            f = f.next;
+        }
+        if (f == null) {
+            return;//q ko co trong danh sach
+        }
+        Node q1 = q.next;
+        f.next = q1;
+        if (f.next == null) {
+            tail = f;
+        }
+    }
+
+    public void deleteAt(int k) {
+        if (isEmpty()) {
+            return;
+        }
+        if (k == 0) {//check if node is head
+            Node p = head;
+            head = head.next;
+            p.next = null;
+        } else {
+            Node p = getNode(k);//get node position k
+            if (p == null) {
+                return;
+            }
+            Node q = getNode(k - 1);//q is node before of p
+            // Remove p
+            q.next = p.next;
+            p.next = null;
+            if (p == tail) {
+                tail = q;
+            }
+        }
+    }
+
+    public Node getNode(int k) {
+        int c = 0;
+        Node p = head;
+        while (p != null && c < k) {
+            p = p.next;
+            c++;
+        }
+        return p;
+    }
+
+//usage:
+     int maxRadius = findMaxNode().info.radius;
+     int indexToDel = search2ndNode(maxRadius);
+     if(indexToDel != -1){
+         deleteAt(indexToDel);
+     }
